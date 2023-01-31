@@ -2,11 +2,12 @@ package com.example.exam.model;
 
 import java.util.Date;
 
-public class movie {
-    public String titre, realisateur, acteurPrincipal;
+public class Movie {
+    public String titre, realisateur;
+    public Actor acteurPrincipal;
     public Date dateSortie;
 
-    public movie(String titre, String realisateur, String acteurPrincipal, Date dateSortie) {
+    public Movie(String titre, String realisateur, Actor acteurPrincipal, Date dateSortie) {
         this.titre = titre;
         this.realisateur = realisateur;
         this.acteurPrincipal = acteurPrincipal;
@@ -21,7 +22,7 @@ public class movie {
         return realisateur;
     }
 
-    public String getActeurPrincipal() {
+    public Actor getActeurPrincipal() {
         return acteurPrincipal;
     }
 

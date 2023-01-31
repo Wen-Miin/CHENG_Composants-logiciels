@@ -1,14 +1,14 @@
 package com.example.exam.model;
 
 import java.util.Date;
-import java.util.List;
 
-public class actor {
+
+public class Actor {
     public String nom, prenom;
     public Date dateNaissance;
-    public String filmographie;
+    public Movie filmographie;
 
-    public actor(String nom, String prenom, Date dateNaissance, String filmographie) {
+    public Actor(String nom, String prenom, Date dateNaissance, Movie filmographie) {
         this.nom = nom;
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;
@@ -27,7 +27,7 @@ public class actor {
         return dateNaissance;
     }
 
-    public String getFilmographie() {
+    public Movie getFilmographie() {
         return filmographie;
     }
 
