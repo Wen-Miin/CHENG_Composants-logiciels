@@ -6,12 +6,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.SwaggerDefinition;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @SwaggerDefinition
@@ -20,11 +20,11 @@ public class MovieActorController {
 
     List<Movie> movieList = new ArrayList<Movie>();
     {
-        Movie film1 = new Movie("Princesse Mononoke","Hayao MIYAZAKI",new Actor(),"12/01/2000");
-        Movie film2 = new Movie("Le voyage de Chihiro","Hayao MIYAZAKI",new Actor(),"10/10/2002");
-        Movie film3 = new Movie("Man of Steel","Zack SNYDER",new Actor(),"19/06/2013");
-        Movie film4 = new Movie("Justice League","Zack SNYDER",new Actor(),"8/11/2017");
-        Movie film5 = new Movie("AGENTS TRÈS SPÉCIAUX - CODE U.N.C.L.E","Guy RITCHIE",new Actor(),"16/09/2015");
+        Movie film1 = new Movie("Princesse Mononoke","Hayao MIYAZAKI",new Actor(),"2000");
+        Movie film2 = new Movie("Le voyage de Chihiro","Hayao MIYAZAKI",new Actor(),"2002");
+        Movie film3 = new Movie("Man of Steel","Zack SNYDER",new Actor(),"2013");
+        Movie film4 = new Movie("Justice League","Zack SNYDER",new Actor(),"2017");
+        Movie film5 = new Movie("AGENTS TRÈS SPÉCIAUX - CODE U.N.C.L.E","Guy RITCHIE",new Actor(),"2015");
 
         movieList.add(film1);
         movieList.add(film2);
@@ -35,9 +35,9 @@ public class MovieActorController {
 
     List<Actor> actorList = new ArrayList<Actor>();
     {
-        Actor actor1 = new Actor("CAVILL","Henri","5/05/1983", new ArrayList<Movie>());
-        Actor actor2 = new Actor("MIYAZAKI","Chihiro","17/08/2000",new ArrayList<Movie>());
-        Actor actor3 = new Actor("MIYAZAKI","Mononoke","09/06/1996",new ArrayList<Movie>());
+        Actor actor1 = new Actor("CAVILL","Henri","5/05/1983", new Movie());
+        Actor actor2 = new Actor("MIYAZAKI","Chihiro","17/08/2000", new Movie());
+        Actor actor3 = new Actor("MIYAZAKI","Mononoke","09/06/1996", new Movie());
         actorList.add(actor1);
         actorList.add(actor2);
         actorList.add(actor3);
@@ -75,11 +75,37 @@ public class MovieActorController {
         return movieList.stream().filter(x -> x.getTitre().equalsIgnoreCase(titre)).collect(Collectors.toList());
     }
 
+    @ApiOperation(value = "Get specific Actors in a Movie in the System ", response = Actor.class, tags = "getActorInMovie")
+    @RequestMapping(value = "/ActorList/{titre}")
+    public List<Actor> getActorByMovie(@PathVariable(value = "titre") String titre) {
+        return actorList.stream().filter(x -> x.getFilmographie().getTitre().equalsIgnoreCase(titre)).collect(Collectors.toList());
+    }
 
+    @ApiOperation(value = "Get specific Movies by Year in the System ", response = Movie.class, tags = "getMovieByYear")
+    @RequestMapping(value = "/MovieList/{dateSortie}")
+    public List<Movie> getMovieByYear(@PathVariable(value = "dateSortie") String dateSortie) {
+        if(dateSortie==null){
+            movieList = new ArrayList<Movie>();
+            Movie student = new Movie("Not Found","N/A",new Actor(),"N/A");
+            movieList.add(student);
+            return movieList;
+        }
+        return movieList.stream().filter(x -> x.getDateSortie().equalsIgnoreCase(dateSortie)).collect(Collectors.toList());
+    }
 
-
-
-
-
+    //@GetMapping("/")
+    //public String sayHello(@RequestParam(value = "name", defaultValue = "Guest") String name) {
+    //    return "Hello " + name + "!!";
+    //}
+//
+    //@GetMapping("/slowApi")
+    //public String timeConsumingAPI(@RequestParam(value = "delay", defaultValue = "0") Integer delay) throws InterruptedException {
+    //    if (delay == 0) {
+    //        Random random = new Random();
+    //        delay = random.nextInt(10);
+    //    }
+    //    TimeUnit.SECONDS.sleep(delay);
+    //    return "Result";
+    //}
 
 }
