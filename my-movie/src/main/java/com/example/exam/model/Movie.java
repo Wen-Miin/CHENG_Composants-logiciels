@@ -5,9 +5,13 @@ import java.util.Date;
 public class Movie {
     public String titre, realisateur;
     public Actor acteurPrincipal;
-    public Date dateSortie;
+    public String dateSortie;
 
-    public Movie(String titre, String realisateur, Actor acteurPrincipal, Date dateSortie) {
+    public Movie(){
+
+    }
+
+    public Movie(String titre, String realisateur, Actor acteurPrincipal, String dateSortie) {
         this.titre = titre;
         this.realisateur = realisateur;
         this.acteurPrincipal = acteurPrincipal;
@@ -26,8 +30,12 @@ public class Movie {
         return acteurPrincipal;
     }
 
-    public Date getDateSortie() {
+    public String getDateSortie() {
         return dateSortie;
+    }
+
+    public void setActeurPrincipal(Actor acteurPrincipal) {
+        this.acteurPrincipal = acteurPrincipal;
     }
 
     @Override

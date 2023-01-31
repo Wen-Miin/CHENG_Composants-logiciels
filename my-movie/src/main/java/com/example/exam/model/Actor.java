@@ -1,14 +1,18 @@
 package com.example.exam.model;
 
 import java.util.Date;
+import java.util.List;
 
 
 public class Actor {
-    public String nom, prenom;
-    public Date dateNaissance;
-    public Movie filmographie;
+    public String nom, prenom, dateNaissance;
+    public List<Movie> filmographie;
 
-    public Actor(String nom, String prenom, Date dateNaissance, Movie filmographie) {
+    public Actor(){
+
+    }
+
+    public Actor(String nom, String prenom, String dateNaissance, List<Movie> filmographie) {
         this.nom = nom;
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;
@@ -23,12 +27,16 @@ public class Actor {
         return prenom;
     }
 
-    public Date getDateNaissance() {
+    public String getDateNaissance() {
         return dateNaissance;
     }
 
-    public Movie getFilmographie() {
+    public List<Movie> getFilmographie() {
         return filmographie;
+    }
+
+    public void setFilmographie(List<Movie> filmographie) {
+        this.filmographie = filmographie;
     }
 
     @Override
